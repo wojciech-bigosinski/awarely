@@ -15,7 +15,7 @@ export default class HomePage extends React.Component {
   }
 
   componentDidMount(){
-    this.nameInput.focus(); 
+    this.themeInput.focus(); 
   }
   
 
@@ -32,7 +32,7 @@ export default class HomePage extends React.Component {
                   <Form onSubmit={e => this.onFormSubmit(e)}>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>I want to raise <Badge variant="secondary">awareness</Badge> about... </Form.Label>
-                        <Form.Control  className="" ref={(input) => { this.nameInput = input; }} 
+                        <Form.Control  className="" ref={(input) => { this.themeInput = input; }} 
                           style={{borderRadius: "0.6rem", borderStyle: "dashed", borderColor: "#3AAFA9", color: "white", textShadow: "2px 2px #2B7A78", 
                           alignItems: "center", textAlign: "center", backgroundColor: "transparent", height: "1.4rem", paddingTop: "1rem", width: "20rem", fontSize: "1.9rem", fontFamily: "Roboto"}} 
                           onChange={this.onThemeInput} maxLength="50"
