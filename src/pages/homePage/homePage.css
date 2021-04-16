@@ -2,19 +2,12 @@
     text-align: center;
   }
   
-  .App-logo {
-    height: 40vmin;
-    pointer-events: none;
-  }
-  
-  @media (prefers-reduced-motion: no-preference) {
-    .App-logo {
-      animation: App-logo-spin infinite 20s linear;
-    }
-  }
-  
   .App-header {
-    background-color: #DDDDDD;
+    text-shadow: 2px 2px #2B7A78;
+    font-family: 'Roboto', sans-serif !important;
+    text-align: center;
+    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%) !important;
+    background-color: #3AAFA9;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -22,6 +15,7 @@
     justify-content: center;
     font-size: calc(10px + 2vmin);
     color: white;
+    font-family: 'Roboto', sans-serif;
   }
   
   .App-link {
@@ -38,10 +32,3 @@
     margin-top: 1rem;
   }
   
-  .beginRectangle {
-    width: 30rem;
-    height: 15rem;
-    background-color: #55595C;
-    border-radius:15px;
-    padding-top: 1rem;
-  }
