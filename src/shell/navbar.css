@@ -1,0 +1,9 @@
+#navbar {
+    background-color: #1C7CD5 !important;
+    height: 3rem !important;
+}
+
+.navbarText {
+    color: #FFF !important;
+    font-family: 'Segoe UI' !important;
+}
