@@ -4,14 +4,18 @@ import './index.css';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import MainContentRouter from './shell/mainContentRouter';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux'
+import store from './redux/store'
 
 ReactDOM.render((
-  <BrowserRouter>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-  </style> 
-    <MainContentRouter/>
-  </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <style>
+          @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        </style>
+        <MainContentRouter/>
+      </BrowserRouter>
+    </Provider>
 ), document.getElementById('root'));
 
 // If you want to start measuring performance in your app, pass a function

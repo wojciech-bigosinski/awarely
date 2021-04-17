@@ -38,10 +38,11 @@ export default class EditorPage extends React.Component {
       <Container className="App-header">
         <h1>Mental health</h1>
         <Editor
-          editorState={editorState}
-          wrapperClassName="demo-wrapper"
-          editorClassName="demo-editor"
-          onEditorStateChange={this.onEditorStateChange}
+            style={{textShadow: "2px 2px #2B7A78"}}
+            editorState={editorState}
+            wrapperClassName="demo-wrapper"
+            editorClassName="demo-editor"
+            onEditorStateChange={this.onEditorStateChange}
         />
       </Container>
     );

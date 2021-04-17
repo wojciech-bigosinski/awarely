@@ -38,7 +38,7 @@ export default class HomePage extends React.Component {
                           onChange={this.onThemeInput} maxLength="50"
                         />
                     </Form.Group>
-                      <Form.Row className="align-items-center" className="submitButton">
+                      <Form.Row className="align-items-center submitButton">
                         <Button className="beginButton" style={{height: "4rem", width: "8rem"}}>
                           <Link to="/editor" style={{color: "gray", textDecoration: "none"}}>Go</Link>
                         </Button>
