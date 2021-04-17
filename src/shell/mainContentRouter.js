@@ -6,11 +6,16 @@ import {
 import HomePage from "../pages/homePage/homePage";
 import EditorPage from "../pages/editorPage/editorPage";
 import SharePage from "../pages/sharePage/sharePage";
+import ViewPage from "../pages/viewPage/viewPage";
 
 
 export default function MainContentRouter() {
     return (
         <Switch>
+
+            <Route path="/view/:id">
+                <ViewPage/>
+            </Route>
 
             <Route path="/share">
                 <SharePage/>
