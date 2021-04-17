@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import './sharePage.css';
-import { Button, Badge, Row, Col, Form } from 'react-bootstrap';
+import {Button, Badge, Row, Col, Form, Container} from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { changeTheme } from '../../redux/actions';
 
 
 class SharePage extends React.Component {
@@ -11,44 +10,27 @@ class SharePage extends React.Component {
     super(props);
     this.state = {
       theme: "",
+      editor: this.props.editor
     };
-
-    this.onThemeInput = this.onThemeInput.bind(this);
   }
-
-  componentDidMount(){
-    this.themeInput.focus(); 
-  }
-  
 
   render() {
     return (
-          <header className="App-header">
-            <div className="beginRectangle">
-              <h1>
-                Awarely
-              </h1>
-              <Row>
-                <Col>
-                  <Form onSubmit={e => this.onFormSubmit(e)}>
-                    <Form.Group controlId="formBasicEmail">
-                        <Form.Label>I want to raise <Badge variant="secondary">awareness</Badge> about... </Form.Label>
-                        <Form.Control  className="" ref={(input) => { this.themeInput = input; }} 
-                          style={{borderRadius: "0.6rem", borderStyle: "dashed", borderColor: "#3AAFA9", color: "white", textShadow: "2px 2px #2B7A78", 
-                          alignItems: "center", textAlign: "center", backgroundColor: "transparent", height: "1.4rem", paddingTop: "1rem", width: "20rem", fontSize: "1.9rem", fontFamily: "Roboto"}} 
-                          onChange={this.onThemeInput} maxLength="50"
-                        />
-                    </Form.Group>
-                      <Form.Row className="align-items-center submitButton">
-                        <Button className="beginButton" style={{height: "4rem", width: "8rem"}}>
-                          <Link to="/editor" style={{color: "gray", textDecoration: "none"}}>Go</Link>
-                        </Button>
-                      </Form.Row> 
-                </Form>
-                </Col>
-              </Row>
-            </div>
-          </header>
+        <Container className="App-header">
+          <h1 style={{marginTop: "0px"}}>Now get sharing!</h1>
+          <Row style={{marginTop: "20rem"}}>
+            <Col className="rectangle">
+
+            </Col>
+          </Row>
+          <Row style={{}}>
+            <Col>
+              <Button className="beginButton" style={{height: "4rem", width: "8rem", position: "fixed", bottom: "0.5rem", left: "0.5rem"}}>
+                <Link to="/" style={{color: "gray", textDecoration: "none"}}>Awarely</Link>
+              </Button>
+            </Col>
+          </Row>
+        </Container>
     );
   }
 
@@ -62,7 +44,7 @@ class SharePage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  theme: state.theme,
+  theme: state.state.theme,
   editor: state.state.editor
 })
 
