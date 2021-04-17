@@ -26,6 +26,7 @@ class EditorPage extends React.Component {
   handleChange (html) {
     this.setState({ editorHtml: html });
     changeEditorState(html)
+    console.log(html)
   }
 
   componentDidMount() {
@@ -44,7 +45,7 @@ class EditorPage extends React.Component {
             <h1 style={{marginTop: "0px"}}>{this.props.theme}</h1> :
             <h1 style={{marginTop: "0px"}}>Editor</h1>
         }
-        <Row style={{marginTop: "20rem"}}>
+        <Row style={{marginTop: "5rem"}}>
           <Col style={{textShadow: "0px 0px white", color: "black", backgroundColor: "#FEFFFF", width: "50rem", marginLeft: "35rem"}}>
             <ReactQuill
                 theme={this.state.themeEditor}
