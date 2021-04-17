@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import './editorPage.css';
 import {Button, Badge, Row, Col, Container, Form} from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { Editor } from 'react-draft-wysiwyg';
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { connect } from "react-redux";
-import { changeEditorState } from '../../redux/actions';
+import { changeEditorState, changeId } from '../../redux/actions';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
@@ -16,7 +16,8 @@ class EditorPage extends React.Component {
     this.state = {
       theme: this.props.theme,
       editorHtml: '',
-      themeEditor: 'snow'
+      themeEditor: 'snow',
+      id: ''
     };
     this.handleChange = this.handleChange.bind(this)
     this.onThemeInput = this.onThemeInput.bind(this);
@@ -25,7 +26,6 @@ class EditorPage extends React.Component {
   handleChange (html) {
     this.setState({ editorHtml: html });
     changeEditorState(html)
-    console.log(this.state.editorHtml)
   }
 
   componentDidMount() {
@@ -62,8 +62,8 @@ class EditorPage extends React.Component {
             <Button className="beginButton" style={{height: "4rem", width: "8rem", position: "fixed", bottom: "0.5rem", left: "0.5rem"}}>
               <Link to="/" style={{color: "gray", textDecoration: "none"}}>Awarely</Link>
             </Button>
-            <Button onClick={this.saveEditor} className="beginButton" style={{height: "4rem", width: "8rem", position: "fixed", bottom: "0.5rem", right: "0.5rem"}}>
-              <Link to="/share" style={{color: "gray", textDecoration: "none"}}>Next</Link>
+            <Button onClick={() => this.saveEditor(this.state)} className="beginButton" style={{height: "4rem", width: "8rem", position: "fixed", bottom: "0.5rem", right: "0.5rem"}}>
+              <Link style={{color: "gray", textDecoration: "none"}}>Next</Link>
             </Button>
           </Col>
         </Row>
@@ -79,29 +79,22 @@ class EditorPage extends React.Component {
     })
   };
 
-  saveEditor = () => {
-    async function saveEditor(data) {
-      const requestOptions = {
-        method: 'POST',
-        mode: "cors",
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-          'Cache-Control': 'no-cache',
-          'Access-Control-Allow-Methods': 'POST'
-        },
-        body: JSON.stringify(data)
-      };
-      return await fetch('https://corrus.pythonanywhere.com/saveEditor/', requestOptions)
-          .then(response => response.json())
-          .then(data => {
-            console.log(data)
-          })
-          .catch((error) => {
-            console.error('Error:', error)
-          });
-    }
-  saveEditor(this.state)
+  async saveEditor(state) {
+        const requestOptions = {
+          method: 'POST',
+          mode: "cors",
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache',
+            'Access-Control-Allow-Methods': 'POST'
+          },
+          body: JSON.stringify(state)
+        };
+        let response = await fetch('https://corrus.pythonanywhere.com/saveEditor/', requestOptions)
+        let json = await response.json()
+        await changeId(json.id)
+        this.props.history.push('/share', json);
   };
 }
 
@@ -139,11 +132,12 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    changeEditorState: (user) => dispatch(changeEditorState(user))
+    changeEditorState: (editor) => dispatch(changeEditorState(editor)),
+    changeId: (id) => dispatch(changeId(id))
   }
 }
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(EditorPage)
+)(EditorPage))

@@ -9,3 +9,7 @@ export const changeTheme = item => ({
 export const changeEditorState = item => ({
     type: types.EDITOR, item
 })
+
+export const changeId = item => ({
+    type: types.ID, item
+})

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './sharePage.css';
 import {Button, Badge, Row, Col, Form, Container} from 'react-bootstrap';
-import { Link } from "react-router-dom";
+import {Link, withRouter} from "react-router-dom";
 import { connect } from "react-redux";
 import {
     EmailShareButton,
@@ -24,12 +24,13 @@ class SharePage extends React.Component {
     super(props);
     this.state = {
       theme: "",
-      editor: this.props.editor
+      id: this.props.id
     };
   }
 
   render() {
       const title = "Awarely"
+      let link = "awarely-hack.web.app/view/" + this.props.history.location.state.id
     return (
         <Container className="App-header">
           <h1 style={{marginTop: "0px"}}>Now get sharing!</h1>
@@ -38,7 +39,7 @@ class SharePage extends React.Component {
                 <Row style={{marginTop: "0rem"}}>
                     <EmailShareButton
                         style={{marginTop: "0.8rem", marginRight: "0.3rem"}}
-                        url={"https://awarely-hack.web.app/"}
+                        url={"https://awarely-hack.web.app/view/" + this.props.id}
                         quote={title}
                         className="Demo__some-network__share-button"
                     >
@@ -46,7 +47,7 @@ class SharePage extends React.Component {
                     </EmailShareButton>
                     <FacebookShareButton
                         style={{marginRight: "0.3rem"}}
-                        url={"https://awarely-hack.web.app/"}
+                        url={"https://awarely-hack.web.app/view/" + this.props.id}
                         quote={title}
                         className="Demo__some-network__share-button"
                     >
@@ -54,7 +55,7 @@ class SharePage extends React.Component {
                     </FacebookShareButton>
                     <FacebookMessengerShareButton
                         style={{marginRight: "0.3rem"}}
-                        url={"https://awarely-hack.web.app/"}
+                        url={link}
                         quote={title}
                         className="Demo__some-network__share-button"
                     >
@@ -62,7 +63,7 @@ class SharePage extends React.Component {
                     </FacebookMessengerShareButton>
                     <LinkedinShareButton
                         style={{marginRight: "0.3rem"}}
-                        url={"https://awarely-hack.web.app/"}
+                        url={link}
                         quote={title}
                         className="Demo__some-network__share-button"
                     >
@@ -70,14 +71,14 @@ class SharePage extends React.Component {
                     </LinkedinShareButton>
                     <RedditShareButton
                         style={{marginRight: "0.3rem"}}
-                        url={"https://awarely-hack.web.app/"}
+                        url={link}
                         quote={title}
                         className="Demo__some-network__share-button"
                     >
                         <RedditIcon size={60} round />
                     </RedditShareButton>
                     <TwitterShareButton
-                        url={"https://awarely-hack.web.app/"}
+                        url={link}
                         quote={title}
                         className="Demo__some-network__share-button"
                     >
@@ -85,7 +86,7 @@ class SharePage extends React.Component {
                     </TwitterShareButton>
                 </Row>
                 <Row style={{marginTop: "4rem"}}>
-                    <Link to="/" style={{color: "white", textDecoration: "none"}}>Awarely</Link>
+                    <Link to={link} style={{color: "white", textDecoration: "none", fontSize: "1.7rem"}}>{link}</Link>
                 </Row>
             </Col>
           </Row>
@@ -110,10 +111,11 @@ class SharePage extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  theme: state.state.theme,
-  editor: state.state.editor
+    theme: state.state.theme,
+    editor: state.state.editor,
+    id: state.state.id
 })
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps
-)(SharePage)
+)(SharePage))
