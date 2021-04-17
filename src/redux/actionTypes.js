@@ -1,6 +1,6 @@
 //enumerate possible action types
 
-const THEME = 'VERIFY'
+const THEME = 'THEME'
 const EDITOR = 'EDITOR'
 
 

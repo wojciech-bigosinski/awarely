@@ -8,18 +8,25 @@ import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import {
   convertToRaw,
 } from 'draft-js';
+import { connect } from "react-redux";
+import { changeEditorState } from '../../redux/actions';
 
 
-export default class EditorPage extends React.Component {
+class EditorPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       theme: "",
-      redirect: false,
       editorState: EditorState.createEmpty(),
     };
 
     this.onThemeInput = this.onThemeInput.bind(this);
+  }
+
+  componentDidMount() {
+    this.state = {
+      theme: this.props.theme
+    }
   }
 
   onEditorStateChange = (editorState) => {
@@ -28,7 +35,6 @@ export default class EditorPage extends React.Component {
     });
     const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
     const value = blocks.map(block => (!block.text.trim() && '\n') || block.text).join('\n');
-    console.log(value)
   };
 
   
@@ -36,7 +42,7 @@ export default class EditorPage extends React.Component {
     const { editorState } = this.state;
     return (
       <Container className="App-header">
-        <h1>Mental health</h1>
+        <h1>{this.props.theme}</h1>
         <Editor
             style={{textShadow: "2px 2px #2B7A78"}}
             editorState={editorState}
@@ -56,3 +62,19 @@ export default class EditorPage extends React.Component {
     })
   };
 }
+
+const mapStateToProps = (state) => ({
+  theme: state.state.theme,
+  editor: state.state.editor
+})
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    changeEditorState: (user) => dispatch(changeEditorState(user))
+  }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(EditorPage)

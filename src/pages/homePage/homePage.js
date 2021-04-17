@@ -63,12 +63,11 @@ class HomePage extends React.Component {
 
 const mapStateToProps = (state) => ({
   theme: state.theme,
-  editor: state.editor
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    changeTheme: (user) => dispatch(changeTheme(user))
+    changeTheme: (theme) => dispatch(changeTheme(theme))
   }
 }
 
