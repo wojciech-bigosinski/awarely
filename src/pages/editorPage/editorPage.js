@@ -44,7 +44,10 @@ class EditorPage extends React.Component {
     let placeholder = "I want to raise awareness about " + this.props.theme;
     return (
       <Container className="textEditor">
-        <h1 style={{marginTop: "0px"}}>{this.props.theme}</h1>
+        {this.props.theme ?
+            <h1 style={{marginTop: "0px"}}>{this.props.theme}</h1> :
+            <h1 style={{marginTop: "0px"}}>Editor</h1>
+        }
         <Row style={{marginTop: "20rem"}}>
           <Col style={{textShadow: "0px 0px white", color: "black", backgroundColor: "#FEFFFF", width: "50rem", marginLeft: "35rem"}}>
             <ReactQuill
