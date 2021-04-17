@@ -2,7 +2,7 @@ import { types } from "./actionTypes";
 
 const INITIAL_STATE = {
     theme: '',
-    editorState: '',
+    editor: '',
 }
 //handle actions, shallow copy state and add/change action item (data)
 const state = (state = INITIAL_STATE, action) => {
@@ -15,7 +15,7 @@ const state = (state = INITIAL_STATE, action) => {
         case 'EDITOR':
             return {
                 ...state,
-               editorState: action.item
+               editor: action.item
             }
         default:
             return state

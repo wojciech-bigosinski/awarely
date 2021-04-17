@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import './homePage.css';
 import { Button, Badge, Row, Col, Form } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { changeTheme } from '../../redux/actions';
 
-export default class HomePage extends React.Component {
+
+class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       theme: "",
-      redirect: false
     };
 
     this.onThemeInput = this.onThemeInput.bind(this);
@@ -19,7 +21,6 @@ export default class HomePage extends React.Component {
   }
   
 
-  
   render() {
     return (
           <header className="App-header">
@@ -55,7 +56,23 @@ export default class HomePage extends React.Component {
     let theme = e.target.value;
     this.setState({
         theme: theme,
-        redirect: true
     })
+    this.props.changeTheme(theme)
   };
 }
+
+const mapStateToProps = (state) => ({
+  theme: state.theme,
+  editor: state.editor
+})
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    changeTheme: (user) => dispatch(changeTheme(user))
+  }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(HomePage)
