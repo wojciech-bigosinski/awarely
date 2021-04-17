@@ -3,11 +3,7 @@ import './editorPage.css';
 import {Button, Badge, Row, Col, Container, Form} from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import { Editor } from 'react-draft-wysiwyg';
-import { EditorState } from 'draft-js';
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import {
-  convertToRaw,
-} from 'draft-js';
 import { connect } from "react-redux";
 import { changeEditorState } from '../../redux/actions';
 import ReactQuill from 'react-quill';
@@ -18,8 +14,7 @@ class EditorPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      theme: "",
-      editorState: EditorState.createEmpty(),
+      theme: this.props.theme,
       editorHtml: '',
       themeEditor: 'snow'
     };
@@ -30,6 +25,7 @@ class EditorPage extends React.Component {
   handleChange (html) {
     this.setState({ editorHtml: html });
     changeEditorState(html)
+    console.log(this.state.editorHtml)
   }
 
   componentDidMount() {
@@ -66,7 +62,7 @@ class EditorPage extends React.Component {
             <Button className="beginButton" style={{height: "4rem", width: "8rem", position: "fixed", bottom: "0.5rem", left: "0.5rem"}}>
               <Link to="/" style={{color: "gray", textDecoration: "none"}}>Awarely</Link>
             </Button>
-            <Button className="beginButton" style={{height: "4rem", width: "8rem", position: "fixed", bottom: "0.5rem", right: "0.5rem"}}>
+            <Button onClick={this.saveEditor} className="beginButton" style={{height: "4rem", width: "8rem", position: "fixed", bottom: "0.5rem", right: "0.5rem"}}>
               <Link to="/share" style={{color: "gray", textDecoration: "none"}}>Next</Link>
             </Button>
           </Col>
@@ -81,6 +77,31 @@ class EditorPage extends React.Component {
         theme: theme,
         redirect: true
     })
+  };
+
+  saveEditor = () => {
+    async function saveEditor(data) {
+      const requestOptions = {
+        method: 'POST',
+        mode: "cors",
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          'Cache-Control': 'no-cache',
+          'Access-Control-Allow-Methods': 'POST'
+        },
+        body: JSON.stringify(data)
+      };
+      return await fetch('https://corrus.pythonanywhere.com/saveEditor/', requestOptions)
+          .then(response => response.json())
+          .then(data => {
+            console.log(data)
+          })
+          .catch((error) => {
+            console.error('Error:', error)
+          });
+    }
+  saveEditor(this.state)
   };
 }
 
