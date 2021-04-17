@@ -31,6 +31,7 @@ class SharePage extends React.Component {
   render() {
       const title = "Awarely"
       let link = "awarely-hack.web.app/view/" + this.props.history.location.state.id
+      let ourLink = "/view/" + this.props.history.location.state.id
     return (
         <Container className="App-header">
           <h1 style={{marginTop: "0px"}}>Now get sharing!</h1>
@@ -86,7 +87,7 @@ class SharePage extends React.Component {
                     </TwitterShareButton>
                 </Row>
                 <Row style={{marginTop: "4rem"}}>
-                    <Link to={link} style={{color: "white", textDecoration: "none", fontSize: "1.7rem"}}>{link}</Link>
+                    <Link to={ourLink} style={{color: "white", textDecoration: "none", fontSize: "1.7rem"}}>{link}</Link>
                 </Row>
             </Col>
           </Row>
