@@ -1,35 +1,15 @@
-.App {
-    text-align: center;
-  }
-  
-  .App-header {
-    font-size: 300% !important;
-    text-shadow: 2px 2px #2B7A78;
-    font-family: 'Roboto', sans-serif !important;
-    text-align: center;
-    background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%) !important;
-    background-color: #3AAFA9;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  .App-link {
-    color: #61dafb;
-  }
-  
-  .beginButton {
-    font-size: 2rem;
-    color: #707070;
-    background-color: #F2F2F2;
-    border: none;
-    border-radius: 0.5rem;
-    align-items: center;
-    margin-top: 6rem;
-  }
-  
+pre {
+  overflow: hidden;
+}
+.textEditor {
+  text-shadow: 2px 2px #2B7A78;
+  font-family: 'Roboto', sans-serif !important;
+  text-align: center;
+  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%) !important;
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
