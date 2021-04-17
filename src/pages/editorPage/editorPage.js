@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState } from 'draft-js';
 import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import {
+  convertToRaw,
+} from 'draft-js';
 
 
 export default class EditorPage extends React.Component {
@@ -23,6 +26,9 @@ export default class EditorPage extends React.Component {
     this.setState({
       editorState,
     });
+    const blocks = convertToRaw(editorState.getCurrentContent()).blocks;
+    const value = blocks.map(block => (!block.text.trim() && '\n') || block.text).join('\n');
+    console.log(value)
   };
 
   
